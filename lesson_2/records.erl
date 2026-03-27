@@ -1,12 +1,11 @@
 -module(records).
 -compile([export_all]).
 
--record(robot, {name, type=industrial, hobbies, details=[]}).
--record(user,  {id, name, group, age}).
-
 % rr() - to load records.
 % rf() - remove records.
 % rl() - print records.
+
+-include("created_records.hrl").
 
 first_robot() ->
   #robot{name = "Mechatron", type=handmade, details=["Moved by a small man inside"]}.
