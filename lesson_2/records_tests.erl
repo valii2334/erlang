@@ -5,8 +5,8 @@
 
 first_robot_test() ->
   TestRobot = #robot{name = "Mechatron", type=handmade, details=["Moved by a small man inside"]},
-  ?assertMatch(TestRobot, records:first_robot()).
+  ?assertEqual(TestRobot, records:first_robot()).
 
 first_robot_test_() ->
   TestRobot = #robot{name = "Mechatron", type=handmade, details=["Moved by a small man inside"]},
-  ?_assertMatch(TestRobot, records:first_robot()).
+  ?_assertEqual(TestRobot, records:first_robot()).
