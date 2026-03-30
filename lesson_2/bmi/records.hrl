@@ -1,0 +1,1 @@
+-record(person, {name, weight, height}).
