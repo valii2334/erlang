@@ -37,7 +37,7 @@ bmi_classify_normal_test_() ->
   fun cleanup/1,
   fun normal_classify/1}.
 
-  normal_classify(Person) ->
+normal_classify(Person) ->
   [?_assertEqual(normal, bmi_calculator:bmi_classify(Person))].
 
 bmi_classify_overweight_test_() ->
@@ -46,7 +46,7 @@ bmi_classify_overweight_test_() ->
   fun cleanup/1,
   fun overweight_classify/1}.
 
-  overweight_classify(Person) ->
+overweight_classify(Person) ->
   [?_assertEqual(overweight, bmi_calculator:bmi_classify(Person))].
 
 bmi_classify_obese_test_() ->
