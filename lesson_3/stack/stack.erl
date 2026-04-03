@@ -4,17 +4,14 @@
 -include("stack_record.hrl").
 
 % push/2
-push(Stack, Element) ->
-  NewStackLength   = Stack#erl_stack.length + 1,
-  NewStackElements = [ Element | Stack#erl_stack.elements ], 
-  Stack#erl_stack{length = NewStackLength, elements = NewStackElements}.
+push(Stack = #erl_stack{ length = Length, elements = Elements}, Element) ->
+  Stack#erl_stack{length = Length + 1, elements = [Element | Elements]}.
 
 % pop/1
-pop(#erl_stack{ elements = [LastElementAdded | RemainingElements]}) ->
-  NewStackLength = #erl_stack.length - 1,
-  NewStack       = #erl_stack{length = NewStackLength, elements = RemainingElements },
+pop(#erl_stack{ length = Length, elements = [LastElementAdded | RemainingElements]}) ->
+  Stack = #erl_stack{length = Length - 1, elements = RemainingElements },
   
-  {LastElementAdded, NewStack};
+  {LastElementAdded, Stack};
 pop(#erl_stack{elements = []}) ->
   {empty, #erl_stack{}}.
 
