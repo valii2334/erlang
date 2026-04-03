@@ -12,8 +12,8 @@ pop(#erl_stack{ length = Length, elements = [LastElementAdded | RemainingElement
   Stack = #erl_stack{length = Length - 1, elements = RemainingElements },
   
   {LastElementAdded, Stack};
-pop(#erl_stack{elements = []}) ->
-  {empty, #erl_stack{}}.
+pop(Stack = #erl_stack{elements = []}) ->
+  {empty, Stack}.
 
 % peek/1
 peek(#erl_stack{elements = [H | _]}) ->
