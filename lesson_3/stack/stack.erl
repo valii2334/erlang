@@ -1,17 +1,15 @@
 -module(stack).
--compile([export_all]).
+-export([push/2, pop/1, peek/1, length/1]).
 
 -include("stack_record.hrl").
 
 % push/2
-push(Stack = #erl_stack{ length = Length, elements = Elements}, Element) ->
+push(Stack = #erl_stack{length = Length, elements = Elements}, Element) ->
   Stack#erl_stack{length = Length + 1, elements = [Element | Elements]}.
 
 % pop/1
-pop(#erl_stack{ length = Length, elements = [LastElementAdded | RemainingElements]}) ->
-  Stack = #erl_stack{length = Length - 1, elements = RemainingElements },
-  
-  {LastElementAdded, Stack};
+pop(Stack = #erl_stack{length = Length, elements = [LastElementAdded | RemainingElements]}) ->
+  {LastElementAdded, Stack#erl_stack{length = Length - 1, elements = RemainingElements }};
 pop(Stack = #erl_stack{elements = []}) ->
   {empty, Stack}.
 
