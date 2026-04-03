@@ -1,0 +1,1 @@
+-record(erl_stack,  {length=0, elements=[]}).
