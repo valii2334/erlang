@@ -18,7 +18,7 @@ process_2() ->
   end.
 
 start(M) ->
-  P1 = spawn(process_1()),
-  P2 = spawn(process_2()),
+  P1 = spawn(fun process_1/0),
+  P2 = spawn(fun process_2/0),
 
   P1 ! {P2, M * 2}.
