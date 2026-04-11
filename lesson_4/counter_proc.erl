@@ -1,5 +1,5 @@
 -module(counter_proc).
--compile([export_all]).
+-export([start/0, start/1]).
 
 start_process(InitialValue) ->
   receive
