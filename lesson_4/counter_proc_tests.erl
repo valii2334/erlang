@@ -46,6 +46,34 @@ process_increments_state_test() ->
     ?assert(false)
   end.
 
+process_does_not_increment_if_value_not_integer_test() ->
+  % Given I have spawned a new process
+  InitialValue = 0,
+  NewProcess   = counter_proc:start(InitialValue),
+
+  % When I send {inc, N}
+  Increment = "RANDOM",
+  NewProcess ! {self(), inc, Increment},
+
+  % Then I should receive ok
+  receive
+    {error, badarg} ->
+      ?assert(true)
+  after 1000 ->
+    ?assert(false)
+  end,
+
+  % And when I get the state
+  NewProcess ! {self(), get},
+
+  % Then I should receive the original value
+  receive
+    {ok, InitialValue} ->
+      ?assert(true)
+  after 1000 ->
+    ?assert(false)
+  end.
+
 process_stops_test() ->
   % Given I have spawned a new process
   NewProcess = counter_proc:start(),

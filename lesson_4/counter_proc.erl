@@ -6,9 +6,15 @@ start_process(InitialValue) ->
     {From, ping} -> 
       From ! pong,
       start_process(InitialValue);
-    {From, inc, N} -> 
-      From ! ok,
-      start_process(InitialValue + N);
+    {From, inc, N} ->
+      case is_integer(N) of
+        true ->
+          From ! ok,
+          start_process(InitialValue + N);
+        false ->
+          From ! {error, badarg},
+          start_process(InitialValue)
+      end;
     {From, get} -> 
       From ! {ok, InitialValue},
       start_process(InitialValue);
