@@ -14,7 +14,8 @@ start_process(InitialValue) ->
       start_process(InitialValue);
     {From, stop} -> 
       From ! stopped;
-    _ -> {error, unsupported},
+    {From, _} -> 
+      From ! {error, unsupported},
       start_process(InitialValue)
   end.
 

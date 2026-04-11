@@ -71,3 +71,18 @@ process_stops_test() ->
   after 1000 ->
     ?assert(true)
   end.
+
+process_returns_error_if_unsupported_message_test() ->
+  % Given I have spawned a new process
+  NewProcess = counter_proc:start(),
+
+  % When I send an unsupported message
+  NewProcess ! {self(), random_message},
+
+  % Then I should receive unsupported message
+  receive
+    {error, unsupported} ->
+      ?assert(true)
+  after 1000 ->
+    ?assert(false)
+  end.
