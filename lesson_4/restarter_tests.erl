@@ -1,14 +1,14 @@
 -module(restarter_tests).
 -include_lib("eunit/include/eunit.hrl").
 
-spawns_a_new_process_and_monitor_test() ->
+spawns_a_new_process_test() ->
   % Given I have a MFA which I want to be in a process and monitored
   MFA = {add, add_two, [0]},
 
   % When I execute start_link(MFA)
   Pid = restarter:start_link(MFA),
 
-  % Then I should receive a Pid and a Ref to the monitor
+  % Then I should receive a Pid
   ?assert(is_pid(Pid)).
 
 should_be_able_to_see_ok_if_a_child_is_alive_test() ->
